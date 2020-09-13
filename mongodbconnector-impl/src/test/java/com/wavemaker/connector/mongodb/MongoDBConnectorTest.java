@@ -30,7 +30,6 @@ import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = MongoTestConfiguration.class)
-@WebAppConfiguration
 public class MongoDBConnectorTest {
 
     @Autowired

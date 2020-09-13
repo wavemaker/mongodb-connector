@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
+import com.mongodb.MongoCredential;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
 
@@ -58,8 +59,10 @@ public class MongoDBConnectionProvider {
             CodecRegistry pojoCodecRegistry = fromProviders(PojoCodecProvider.builder().automatic(true).build());
             CodecRegistry codecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
                     pojoCodecRegistry);
+            MongoCredential credential = MongoCredential.createCredential(username, dbName, password.toCharArray());
             MongoClientSettings clientSettings = MongoClientSettings.builder()
                     .applyConnectionString(connectionString)
+                    .credential(credential)
                     .codecRegistry(codecRegistry)
                     .build();
 
